@@ -25,7 +25,7 @@ graph TD
 flowchart TD
   A[User Visual Input] --> B[Input Pipeline]
   B --> C[Image or Video Preprocessing]
-  C --> D[YOLOv8 Inference]
+  C --> D[YOLOv11 Inference]
 
   subgraph Optional Text Flow
     E[Side Input Text] --> F[LLM Parser]
