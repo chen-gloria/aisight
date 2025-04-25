@@ -3,8 +3,11 @@ from pydantic_ai import Agent, RunContext
 from dotenv import load_dotenv
 import asyncio
 from typing import List
+from pydantic_ai.mcp import MCPServerHTTP
 
 load_dotenv()
+
+mcp_server = MCPServerHTTP(url='http://localhost:3001/sse')
 
 class ImageResult(BaseModel):
     object_count: int
@@ -16,12 +19,18 @@ class CountObjectsResult(BaseModel):
 class DetectObjectResult(BaseModel):
     detected_objects: List[str]
 
+class DateDifferenceResult(BaseModel):
+    days_between: int
+
 agent = Agent(
     "openai:gpt-4o",
     result_type=ImageResult,
+    mcp_servers=[mcp_server],
     system_prompt=
     "You will be given an image description and you will need to call the appropriate tools to get the image recognition results. "
-    "Use 'count_objects' to get the object count and 'detect_object' to get the detected objects.",
+    "Use 'count_objects' to get the object count and 'detect_object' to get the detected objects."
+    "Use 'run_mcp_client' to find the number of days between two dates"
+    ,
 )
 
 @agent.tool
@@ -31,6 +40,19 @@ async def count_objects(ctx: RunContext) -> CountObjectsResult:
 @agent.tool
 async def detect_object(ctx: RunContext) -> DetectObjectResult:
     return "Detect the object based on the image description."
+
+@agent.tool
+async def run_mcp_client(ctx: RunContext, start_date: str, end_date: str) -> DateDifferenceResult:
+    """Calculate the number of days between two dates using the MCP server.
+    
+    Args:
+        start_date: The start date in YYYY-MM-DD format
+        end_date: The end date in YYYY-MM-DD format
+    """
+    async with agent.run_mcp_servers():
+        result = await agent.run(f'How many days between {start_date} and {end_date}?')
+    return DateDifferenceResult(days_between=int(result.output))
+
 
 async def main(prompt: str):
     nodes = []
@@ -43,6 +65,6 @@ async def main(prompt: str):
 
 
 if __name__ == "__main__":
-    prompt = "There is a land that has four cars in it."
+    prompt = "How many days between 2000-01-01 and 2025-03-18?"
     asyncio.run(main(prompt))
 
