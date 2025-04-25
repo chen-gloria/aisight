@@ -60,7 +60,7 @@ uv run ruff check --fix
 To format the code, run the following command:
 
 ```
-uv run ruff format --fix
+uv run ruff format
 ```
 
 To run the tests, run the following command:

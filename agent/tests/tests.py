@@ -2,6 +2,7 @@ from main import app
 from fastapi.testclient import TestClient
 from dotenv import load_dotenv
 from agent import agent
+
 load_dotenv()
 
 client = TestClient(app)
@@ -23,8 +24,10 @@ def test_agent_exists():
 
 
 def test_geo_guess_location_from_image_url():
-    response = client.post("/geo_guess_location_from_image_url", json={"image_url": "https://iili.io/3Hs4FMg.png"})
+    response = client.post(
+        "/geo_guess_location_from_image_url",
+        json={"image_url": "https://iili.io/3Hs4FMg.png"},
+    )
     print(response.__dict__)
     assert response.status_code == 200
     assert "Pydantic" in response.text
-

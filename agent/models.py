@@ -1,11 +1,16 @@
 from pydantic import BaseModel, Field
-from typing import List, Dict, Any, Optional, Union
+from typing import List, Dict, Optional
+
+
 class GeoGuessResult(BaseModel):
     result: str
 
+
 # Response Models
 class DetectionBox(BaseModel):
-    box: List[float] = Field(..., description="Bounding box coordinates [x1, y1, x2, y2]")
+    box: List[float] = Field(
+        ..., description="Bounding box coordinates [x1, y1, x2, y2]"
+    )
     confidence: float = Field(..., description="Detection confidence score")
     class_id: int = Field(..., description="Class ID")
     class_name: str = Field(..., description="Class name")
@@ -17,7 +22,9 @@ class DetectionResult(BaseModel):
 
 
 class DetectionResponse(BaseModel):
-    results: List[DetectionResult] = Field(..., description="Detection results for each image")
+    results: List[DetectionResult] = Field(
+        ..., description="Detection results for each image"
+    )
     model_used: str = Field(..., description="Model used for detection")
     total_detections: int = Field(..., description="Total number of detections")
     source: str = Field(..., description="Source of the image (path or base64)")
@@ -31,22 +38,30 @@ class Classification(BaseModel):
 
 
 class ClassificationResult(BaseModel):
-    classifications: List[Classification] = Field(..., description="List of classifications")
+    classifications: List[Classification] = Field(
+        ..., description="List of classifications"
+    )
     image_shape: List[int] = Field(..., description="Image dimensions [width, height]")
 
 
 class ClassificationResponse(BaseModel):
     source: str = Field(..., description="Source of the image (path or base64)")
-    error: Optional[str] = Field(None, description="Error message if classification failed")
+    error: Optional[str] = Field(
+        None, description="Error message if classification failed"
+    )
 
 
 class ModelInfo(BaseModel):
     model_name: str = Field(..., description="Model name")
-    task: str = Field(..., description="Model task (detect, segment, pose, classify, obb)")
+    task: str = Field(
+        ..., description="Model task (detect, segment, pose, classify, obb)"
+    )
     yaml: str = Field(..., description="Model YAML configuration")
     pt_path: Optional[str] = Field(None, description="Path to model weights file")
     class_names: Dict[int, str] = Field(..., description="Class names dictionary")
-    error: Optional[str] = Field(None, description="Error message if info retrieval failed")
+    error: Optional[str] = Field(
+        None, description="Error message if info retrieval failed"
+    )
 
 
 class ModelMetrics(BaseModel):
