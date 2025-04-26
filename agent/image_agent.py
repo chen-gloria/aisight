@@ -1,76 +1,50 @@
+import os
+import asyncio
+from typing import List, Dict, Any, Union
+from pathlib import Path
 from pydantic import BaseModel
+from pydantic_ai.mcp import MCPServerStdio
+from models import ClassificationResponse, DetectionResponse
+import base64
 from pydantic_ai import Agent, RunContext
 from dotenv import load_dotenv
-import asyncio
-from typing import List
-from pydantic_ai.mcp import MCPServerStdio
+import logfire
+from dataclasses import dataclass
+
+logfire.configure()
 
 load_dotenv()
 
+server = MCPServerStdio(
+    command="uv",
+    args=["run", "yolo_server.py", "server"],
+)
 
-class ImageResult(BaseModel):
-    object_count: int
-    detected_objects: List[str]
-
-
-class CountObjectsResult(BaseModel):
-    object_count: int
-
-
-class DetectObjectResult(BaseModel):
-    detected_objects: List[str]
-
-
-class DateDifferenceResult(BaseModel):
-    days_between: int
-
-server = MCPServerStdio()
+@dataclass
+class AgentDeps:
+    image_path: str
 
 agent = Agent(
     "openai:gpt-4o",
-    result_type=ImageResult,
     mcp_servers=[server],
-    system_prompt="You will be given an image description and you will need to call the appropriate tools to get the image recognition results. "
-    "Use 'count_objects' to get the object count and 'detect_object' to get the detected objects."
-    "Use 'run_mcp_client' to find the number of days between two dates",
+    deps_type=AgentDeps,
+    system_prompt="You will be given an image path and a computer vision task. You will need to call the appropriate server tools to get the results of the computer vision task. "
+    "Use 'detect_objects' to get the detected objects."
+    "Use 'classify_image' to get the classification results."
+    "Use 'start_camera_detection' to start the camera detection."
+    "Use 'stop_camera_detection' to stop the camera detection."
+    "Use 'get_camera_detections' to get the latest detections from the camera."
+    "Use 'test_connection' to test the connection to the YOLO MCP service.",
+    instrument=True
 )
 
-
-@agent.tool
-async def count_objects(ctx: RunContext) -> CountObjectsResult:
-    return "Detect the number of objects based on the image description."
-
-
-@agent.tool
-async def detect_object(ctx: RunContext) -> DetectObjectResult:
-    return "Detect the object based on the image description."
-
-
-@agent.tool
-async def run_mcp_client(
-    ctx: RunContext, start_date: str, end_date: str
-) -> DateDifferenceResult:
-    """Calculate the number of days between two dates using the MCP server.
-
-    Args:
-        start_date: The start date in YYYY-MM-DD format
-        end_date: The end date in YYYY-MM-DD format
-    """
+async def main():
+    image_path = "C:/Users/Gunee/Projects/aisight/agent/public/images/dog.jpg"
+    deps = AgentDeps(image_path)
     async with agent.run_mcp_servers():
-        result = await agent.run(f"How many days between {start_date} and {end_date}?")
-    return DateDifferenceResult(days_between=int(result.output))
-
-
-async def main(prompt: str):
-    nodes = []
-    # Begin an AgentRun, which is an async-iterable over the nodes of the agent's graph
-    async with agent.iter(prompt) as agent_run:
-        async for node in agent_run:
-            # Each node represents a step in the agent's execution
-            nodes.append(node)
-    print(nodes)
-
+        await agent.run(f'Classify this image: {deps.image_path}', deps=deps)
+        # await agent.run('Classify what you detect in the camera', deps=deps)
 
 if __name__ == "__main__":
-    prompt = "How many days between 2000-01-01 and 2025-03-18?"
-    asyncio.run(main(prompt))
+    asyncio.run(main())
+
