@@ -1,3 +1,19 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
 .idea/
-agent/models/*
-agent/images/*
+.idea/**/*
+.env
+.agent/models/
+src/yolo_service.log
+*.pt
+runs/
+
+/.logfire

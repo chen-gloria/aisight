@@ -1,7 +1,7 @@
-from main import app
+from src.main import app
 from fastapi.testclient import TestClient
 from dotenv import load_dotenv
-from agent import agent
+from src.agent import agent
 
 load_dotenv()
 
