@@ -38,7 +38,18 @@ agent = Agent(
     instrument=True
 )
 
-async def main():
+def main():
+    '''
+    Implementation explained here: https://www.slingacademy.com/article/python-asyncio-runtimeerror-event-loop-closed-fixing-guide/
+    :return:
+    '''
+    loop = asyncio.get_event_loop()
+    if loop.is_closed():
+        asyncio.set_event_loop(asyncio.new_event_loop())
+    loop = asyncio.get_event_loop()
+    loop.run_until_complete(run_agent())
+
+async def run_agent():
     image_path = "C:/Users/Gunee/Projects/aisight/agent/public/images/dog.jpg"
     deps = AgentDeps(image_path)
     async with agent.run_mcp_servers():
@@ -46,5 +57,5 @@ async def main():
         # await agent.run('Classify what you detect in the camera', deps=deps)
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    main()
 
