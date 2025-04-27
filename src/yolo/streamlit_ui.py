@@ -5,7 +5,7 @@ if sys.platform.startswith('win') and sys.version_info >= (3, 8):
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 import streamlit as st
-from image_agent import run_agent, agent, AgentDeps
+from agent import run_agent, agent, AgentDeps
 import os
 from pathlib import Path
 

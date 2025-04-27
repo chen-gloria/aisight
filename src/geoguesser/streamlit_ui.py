@@ -1,6 +1,6 @@
 import streamlit as st
 from PIL import Image
-from agent import geo_guess_location_from_image
+from geoguesser.agent import geo_guess_location_from_image
 import httpx
 import asyncio
 

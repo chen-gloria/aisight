@@ -2,7 +2,7 @@ from __future__ import annotations as _annotations
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
-from agent import geo_guess_location_from_image
+from geoguesser.agent import geo_guess_location_from_image
 import httpx
 from pydantic import BaseModel
 

@@ -1,7 +1,7 @@
-from src.main import app
+from geoguesser.main import app
 from fastapi.testclient import TestClient
 from dotenv import load_dotenv
-from src.agent import agent
+from geoguesser.agent import agent
 
 load_dotenv()
 

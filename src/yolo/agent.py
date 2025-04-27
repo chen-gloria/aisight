@@ -4,7 +4,7 @@ from typing import List, Dict, Any, Union
 from pathlib import Path
 from pydantic import BaseModel
 from pydantic_ai.mcp import MCPServerStdio
-from models import ClassificationResponse, DetectionResponse
+from pydantic_models import ClassificationResponse, DetectionResponse
 import base64
 from pydantic_ai import Agent, RunContext
 from dotenv import load_dotenv
