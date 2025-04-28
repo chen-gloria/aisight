@@ -1,12 +1,6 @@
-import os
 import asyncio
-from typing import List, Dict, Any, Union
-from pathlib import Path
-from pydantic import BaseModel
 from pydantic_ai.mcp import MCPServerStdio
-from pydantic_models import ClassificationResponse, DetectionResponse
-import base64
-from pydantic_ai import Agent, RunContext
+from pydantic_ai import Agent
 from dotenv import load_dotenv
 import logfire
 from dataclasses import dataclass
@@ -17,7 +11,7 @@ load_dotenv()
 
 server = MCPServerStdio(
     command="uv",
-    args=["run", "yolo_server.py", "server"],
+    args=["run", "server.py", "server"],
 )
 
 @dataclass
@@ -38,24 +32,28 @@ agent = Agent(
     instrument=True
 )
 
-def main():
-    '''
-    Implementation explained here: https://www.slingacademy.com/article/python-asyncio-runtimeerror-event-loop-closed-fixing-guide/
-    :return:
-    '''
-    loop = asyncio.get_event_loop()
-    if loop.is_closed():
-        asyncio.set_event_loop(asyncio.new_event_loop())
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(run_agent())
 
-async def run_agent():
-    image_path = "C:/Users/Gunee/Projects/aisight/agent/public/images/dog.jpg"
-    deps = AgentDeps(image_path)
+def run_agent_loop(file_path: str):
+    try:
+        loop = asyncio.get_running_loop()
+    except RuntimeError:
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    if loop.is_closed():
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+    return loop.run_until_complete(run_agent(file_path))
+
+
+async def run_agent(file_path: str):
+    deps = AgentDeps(file_path)
     async with agent.run_mcp_servers():
-        await agent.run(f'Classify this image: {deps.image_path}', deps=deps)
-        # await agent.run('Classify what you detect in the camera', deps=deps)
+        return await agent.run(f"Classify this image: {deps.image_path} using the 'yolov8n-cls.pt' model" , deps=deps)
+
 
 if __name__ == "__main__":
-    main()
+    image_path = "C:/Users/Gunee/Projects/aisight/public/images/dog.jpg"
+    result = run_agent_loop(image_path)
+    print(result.data)
+
 

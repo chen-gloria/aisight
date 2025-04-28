@@ -349,3 +349,88 @@
 2025-04-27 15:21:34,337 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
 2025-04-27 15:21:34,339 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
 2025-04-27 15:21:34,345 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:15:23,920 - yolo_service - INFO - Starting YOLO MCP service
+2025-04-28 12:15:23,920 - yolo_service - INFO - Camera watchdog thread started
+2025-04-28 12:15:23,928 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:15:26,056 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:15:26,058 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-04-28 12:15:26,060 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:16:12,802 - yolo_service - INFO - Starting YOLO MCP service
+2025-04-28 12:16:12,802 - yolo_service - INFO - Camera watchdog thread started
+2025-04-28 12:16:12,810 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:16:14,063 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:16:14,065 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-04-28 12:16:14,094 - yolo_service - WARNING - No model files found in configured directories.
+2025-04-28 12:16:14,096 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:16:51,892 - yolo_service - INFO - Starting YOLO MCP service
+2025-04-28 12:16:51,893 - yolo_service - INFO - Camera watchdog thread started
+2025-04-28 12:16:51,900 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:16:53,181 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:16:53,183 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-04-28 12:16:53,189 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:17:51,176 - yolo_service - INFO - Starting YOLO MCP service
+2025-04-28 12:17:51,177 - yolo_service - INFO - Camera watchdog thread started
+2025-04-28 12:17:51,184 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:17:52,411 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:17:52,413 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-04-28 12:17:52,419 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:24:04,667 - yolo_service - INFO - Starting YOLO MCP service
+2025-04-28 12:24:04,667 - yolo_service - INFO - Camera watchdog thread started
+2025-04-28 12:24:04,675 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:24:05,893 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:24:05,895 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-04-28 12:24:05,901 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:24:46,087 - yolo_service - INFO - Starting YOLO MCP service
+2025-04-28 12:24:46,088 - yolo_service - INFO - Camera watchdog thread started
+2025-04-28 12:24:46,095 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:24:47,227 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:24:47,229 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-04-28 12:24:47,235 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:24:49,404 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:24:49,406 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-04-28 12:24:49,406 - yolo_service - INFO - Loading model: yolov8n-cls.pt from ./models\yolov8n-cls.pt
+2025-04-28 12:24:51,693 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:26:10,367 - yolo_service - INFO - Starting YOLO MCP service
+2025-04-28 12:26:10,367 - yolo_service - INFO - Camera watchdog thread started
+2025-04-28 12:26:10,375 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:26:11,533 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:26:11,535 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-04-28 12:26:11,540 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:26:31,442 - yolo_service - INFO - Starting YOLO MCP service
+2025-04-28 12:26:31,442 - yolo_service - INFO - Camera watchdog thread started
+2025-04-28 12:26:31,449 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:26:32,596 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:26:32,598 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-04-28 12:26:32,605 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:27:34,825 - yolo_service - INFO - Starting YOLO MCP service
+2025-04-28 12:27:34,825 - yolo_service - INFO - Camera watchdog thread started
+2025-04-28 12:27:34,833 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:27:36,053 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:27:36,055 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-04-28 12:27:36,057 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:28:17,611 - yolo_service - INFO - Starting YOLO MCP service
+2025-04-28 12:28:17,612 - yolo_service - INFO - Camera watchdog thread started
+2025-04-28 12:28:17,619 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:28:18,960 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:28:18,962 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-04-28 12:28:18,964 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:28:42,774 - yolo_service - INFO - Starting YOLO MCP service
+2025-04-28 12:28:42,774 - yolo_service - INFO - Camera watchdog thread started
+2025-04-28 12:28:42,782 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:28:43,903 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:28:43,906 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-04-28 12:28:43,907 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:29:11,953 - yolo_service - INFO - Starting YOLO MCP service
+2025-04-28 12:29:11,953 - yolo_service - INFO - Camera watchdog thread started
+2025-04-28 12:29:11,961 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:29:13,877 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 12:29:13,879 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-04-28 12:29:13,883 - yolo_service - INFO - Loading model: yolov8n-cls.pt from ./models\yolov8n-cls.pt
+2025-04-28 12:29:14,718 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 16:27:54,543 - yolo_service - INFO - Starting YOLO MCP service
+2025-04-28 16:27:54,543 - yolo_service - INFO - Camera watchdog thread started
+2025-04-28 16:27:54,551 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 16:27:56,298 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest
+2025-04-28 16:27:56,300 - mcp.server.lowlevel.server - INFO - Processing request of type CallToolRequest
+2025-04-28 16:27:56,326 - yolo_service - INFO - Loading model: yolov8n-cls.pt from ./models\yolov8n-cls.pt
+2025-04-28 16:27:57,535 - mcp.server.lowlevel.server - INFO - Processing request of type ListToolsRequest

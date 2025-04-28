@@ -2,9 +2,10 @@ from __future__ import annotations as _annotations
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
-from geoguesser.agent import geo_guess_location_from_image
+from src.geoguesser.agent import geo_guess_location_from_image
 import httpx
 from pydantic import BaseModel
+from src.yolo.agent import run_agent_loop
 
 load_dotenv()
 app = FastAPI()
@@ -26,6 +27,8 @@ async def read_root():
 class ImageUrlRequest(BaseModel):
     image_url: str
 
+class ImageFilePathRequest(BaseModel):
+    file_path: str
 
 @app.post("/geo_guess_location_from_image_url")
 async def geo_guess_location_from_image_url(request: ImageUrlRequest):
@@ -56,6 +59,19 @@ async def geo_guess_location_from_image_url(request: ImageUrlRequest):
             status_code=status.HTTP_400_BAD_REQUEST,
             detail=f"Error fetching the image: {str(e)}",
         )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"An error occurred: {str(e)}",
+        )
+
+
+@app.post("/classify_image_from_local_file_path")
+async def classify_image_from_local_file_path(request: ImageFilePathRequest):
+    file_path = request.file_path
+    try:
+        result = await run_agent_loop(file_path)
+        return result.data
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
