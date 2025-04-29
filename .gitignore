@@ -11,3 +11,9 @@ wheels/
 .idea/
 .idea/**/*
 .env
+.agent/models/
+src/yolo_service.log
+*.pt
+runs/
+
+/.logfire

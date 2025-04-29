@@ -3,7 +3,7 @@ from pydantic_ai.models.gemini import GeminiModel
 from pydantic_ai.models.gemini import GeminiModelSettings
 from dotenv import load_dotenv
 from typing import Union
-from models import GeoGuessResult
+from src.pydantic_models import GeoGuessResult
 
 load_dotenv()
 
