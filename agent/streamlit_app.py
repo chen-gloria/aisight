@@ -35,8 +35,9 @@ if uploaded_file:
     image_bytes_data = uploaded_file.getvalue()
 
 with st.sidebar:
+    st.header("Ai Sight app")
+
     if uploaded_file is None and len(st.session_state.get("image_link", "")) == 0:
-        st.header("Ai Sight app")
         st.write(
             "This app uses a generative model (gemini-2.0-flash) to do anything with this photo."
         )
