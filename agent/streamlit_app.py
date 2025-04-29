@@ -3,59 +3,71 @@ from PIL import Image
 from agent import geo_guess_location_from_image
 import httpx
 import asyncio
+import logging
+
+logging.basicConfig(
+    format="%(asctime)s - %(levelname)s - %(message)s",
+    level=logging.DEBUG,  # or DEBUG for more detail
+)
+logger = logging.getLogger(__name__)
 
 st.set_page_config(
-    page_title="Photo to Geo location guesser",
-    page_icon="📍",
+    page_title="Photo to anything",
+    page_icon="📷",
     layout="wide",
     initial_sidebar_state="expanded",
 )
 
-st.header("Guess location from image")
-
-with st.sidebar:
-    st.header("Location guessing app")
-    st.write(
-        "This app uses a generative model (gemini-2.0-flash) to guess the geographical location of the chosen photo."
-    )
-    st.header("How to use this app")
-    st.write(
-        "1. Upload a photo from local device (jpg) or from web link (jpg or png)"
-    )
-    st.write("2. Scroll down and click 'Guess the location' button")
-    st.write("3. Wait for a bit, it will show the output below the button")
-
-uploaded_file = st.file_uploader(
-    "Upload image file", accept_multiple_files=False, type=["jpg"]
-)
+st.header("Upload your image here")
 
 def reset():
+    logging.info("I call the reset!")
     st.session_state.clear()
 
-if uploaded_file is None:
-    st.write("or")
-    image_link = st.text_input("Enter image link")
-else:
-    image_link = ""
+uploaded_file = st.file_uploader(
+    "Upload image file", accept_multiple_files=False, type=["jpg","png","jpeg"]
+)
 
-if uploaded_file is not None:
+if uploaded_file: 
     image = Image.open(uploaded_file)
 
     st.image(image, caption="Uploaded Image", use_container_width=True)
     image_bytes_data = uploaded_file.getvalue()
 
-    generate = st.button(
-        "Guess the location", type="primary", use_container_width=True
-    )
+with st.sidebar:
+    st.header("Ai Sight app")
 
-    if generate:
-        st.write("Let's guess the location now")
-        with st.spinner("Generating..."):
-            # Create an event loop and run the async function
-            result = asyncio.run(geo_guess_location_from_image(image_bytes_data))
-            st.write(result.data)
-        st.success("Done!")
-        st.button("Reset", on_click=reset)
+    if uploaded_file is None and len(st.session_state.get("image_link", "")) == 0:
+        st.write(
+            "This app uses a generative model (gemini-2.0-flash) to do anything with this photo."
+        )
+        st.header("How to use this app")
+        st.write(
+            "1. Upload a photo from local device (jpg, png or jpeg) or from web link (jpg or png or jpeg)"
+        )
+        st.write("2. Select an option that you want to implement on the side navbar.")
+        st.write("3. Wait for a bit, it will show the output below the button.")
+    elif uploaded_file or len(st.session_state.get("image_link", "")) > 0:
+        generate = st.button(
+            "Guess the location", type="primary", use_container_width=True
+        )
+
+        if generate:
+            st.write("Let's guess the location now")
+            with st.spinner("Generating..."):
+                # Create an event loop and run the async function
+                result = asyncio.run(geo_guess_location_from_image(image_bytes_data))
+                st.write(result.data)
+            st.success("Done!")
+            st.button("Reset", on_click=reset)
+
+if uploaded_file is None:
+    logging.info("No file is uploaded.")
+    st.write("or")
+    image_link = st.text_input("Enter image link")
+else:
+    logging.info("Set the image link to empty")
+    image_link = ""
 
 if len(image_link) > 0:
     try:
